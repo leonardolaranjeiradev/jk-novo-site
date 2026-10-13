@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  :root {
+    --footer-h: 10.5rem;
+  }
+
+  body {
+    background-color: #121417;
+  }
+
+  ::selection {
+    background-color: #FF6A00;
+    color: #0F0F0F;
+  }
+
+  :focus-visible {
+    outline: 2px solid #FF6A00;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Marcas de canto inspiradas em pranchas técnicas de projeto (planta baixa) */
+  .blueprint-frame {
+    position: relative;
+  }
+
+  .blueprint-frame::before,
+  .blueprint-frame::after,
+  .blueprint-frame > .corner-tl,
+  .blueprint-frame > .corner-br {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #FF6A00;
+    pointer-events: none;
+  }
+
+  .blueprint-frame::before {
+    top: -10px;
+    left: -10px;
+    border-top: 2px solid #FF6A00;
+    border-left: 2px solid #FF6A00;
+  }
+
+  .blueprint-frame::after {
+    bottom: -10px;
+    right: -10px;
+    border-bottom: 2px solid #FF6A00;
+    border-right: 2px solid #FF6A00;
+  }
+
+  .section-heading-eyebrow {
+    @apply flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary;
+  }
+
+  .section-heading-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background-color: #FF6A00;
+  }
+
+  /* Variante do eyebrow para seções claras: texto grafite, traço laranja */
+  .section-heading-eyebrow.eyebrow-dark {
+    @apply text-ink;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-primary px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_10px_28px_-10px_rgba(255,106,0,0.75)] transition-colors duration-200 hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  /* Botão "pílula" com contorno laranja (ex.: "Conheça todos os serviços") */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-primary px-5 py-2.5 text-sm font-medium transition-colors duration-200 hover:bg-primary hover:text-white;
+  }
+
+  /* Recorta as margens transparentes do arquivo quadrado da logo.
+     A arte original não é alterada — apenas o enquadramento. */
+  .logo-crop {
+    @apply relative block overflow-hidden;
+    aspect-ratio: 1.2 / 1;
+  }
+
+  .logo-crop > img {
+    position: absolute;
+    max-width: none;
+    width: 104%;
+    left: -2.1%;
+    top: -13.7%;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-border-subtle px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-text-primary transition-colors duration-200 hover:border-primary hover:text-primary;
+  }
+}
